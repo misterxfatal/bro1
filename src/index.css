@@ -302,62 +302,62 @@
 
 /* Professional button styles */
 .btn-professional {
-  @apply inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 touch-manipulation transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl;
+  @apply inline-flex items-center justify-center px-4 py-2 text-sm font-bold rounded-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 touch-manipulation transform hover:-translate-y-0.5 shadow-xl hover:shadow-2xl border-2;
 }
 
 .btn-professional-primary {
-  @apply btn-professional bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-500 border-2 border-slate-800;
+  @apply btn-professional bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-500/50 border-slate-900;
 }
 
 .btn-professional-secondary {
-  @apply btn-professional bg-white text-slate-700 border-2 border-slate-300 hover:bg-slate-50 focus:ring-slate-500;
+  @apply btn-professional bg-white text-slate-900 border-slate-300 hover:bg-slate-50 hover:border-slate-400 focus:ring-slate-500/50;
 }
 
 .btn-professional-success {
-  @apply btn-professional bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500 border-2 border-emerald-600;
+  @apply btn-professional bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500/50 border-emerald-600;
 }
 
 .btn-professional-danger {
-  @apply btn-professional bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 border-2 border-red-600;
+  @apply btn-professional bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/50 border-red-600;
 }
 
 /* Professional card styles */
 .card-professional {
-  @apply bg-white/90 backdrop-blur-xl rounded-xl border-2 border-slate-200/70 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1;
+  @apply bg-white/98 backdrop-blur-xl rounded-xl border-2 border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1;
 }
 
 .card-professional-dark {
-  @apply bg-slate-800/90 backdrop-blur-xl border-2 border-slate-700/60 text-white shadow-xl;
+  @apply bg-slate-800/98 backdrop-blur-xl border-2 border-slate-700 text-white shadow-xl;
 }
 
 /* Professional input styles */
 .input-professional {
-  @apply w-full px-3 py-2 text-sm border-2 border-slate-300 rounded-lg bg-white/90 backdrop-blur-sm text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-all duration-300 shadow-md;
+  @apply w-full px-4 py-3 text-sm border-2 border-slate-300 rounded-lg bg-white/98 backdrop-blur-sm text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-slate-500/30 focus:border-slate-600 transition-all duration-300 shadow-lg font-medium;
 }
 
 .input-professional-dark {
-  @apply bg-slate-800/90 backdrop-blur-sm border-2 border-slate-600 text-white placeholder-slate-400 focus:ring-slate-400 focus:border-slate-400 shadow-md;
+  @apply bg-slate-800/98 backdrop-blur-sm border-2 border-slate-600 text-white placeholder-slate-400 focus:ring-4 focus:ring-slate-400/30 focus:border-slate-500 shadow-lg font-medium;
 }
 
 /* Professional badge styles */
 .badge-professional {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold backdrop-blur-sm shadow-md border;
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold backdrop-blur-sm shadow-lg border-2;
 }
 
 .badge-professional-primary {
-  @apply badge-professional bg-slate-100/90 text-slate-800 border-slate-300;
+  @apply badge-professional bg-slate-100/95 text-slate-900 border-slate-300;
 }
 
 .badge-professional-success {
-  @apply badge-professional bg-emerald-100/90 text-emerald-800 border-emerald-300;
+  @apply badge-professional bg-emerald-100/95 text-emerald-900 border-emerald-300;
 }
 
 .badge-professional-warning {
-  @apply badge-professional bg-amber-100/90 text-amber-800 border-amber-300;
+  @apply badge-professional bg-amber-100/95 text-amber-900 border-amber-300;
 }
 
 .badge-professional-danger {
-  @apply badge-professional bg-red-100/90 text-red-800 border-red-300;
+  @apply badge-professional bg-red-100/95 text-red-900 border-red-300;
 }
 
 /* Responsive breakpoint utilities */
@@ -439,23 +439,23 @@
 
 /* Professional progress bars */
 .progress-bar {
-  @apply w-full bg-slate-200/90 backdrop-blur-sm rounded-full h-2 overflow-hidden shadow-inner border border-slate-300/50;
+  @apply w-full bg-slate-200/95 backdrop-blur-sm rounded-full h-3 overflow-hidden shadow-inner border-2 border-slate-300;
 }
 
 .progress-bar-fill {
-  @apply h-full bg-slate-900 rounded-full transition-all duration-500 ease-out shadow-sm;
+  @apply h-full bg-slate-900 rounded-full transition-all duration-500 ease-out shadow-md;
 }
 
 .progress-bar-success .progress-bar-fill {
-  @apply bg-emerald-600 shadow-emerald-500/30;
+  @apply bg-emerald-600 shadow-lg shadow-emerald-500/40;
 }
 
 .progress-bar-warning .progress-bar-fill {
-  @apply bg-amber-600 shadow-amber-500/30;
+  @apply bg-amber-600 shadow-lg shadow-amber-500/40;
 }
 
 .progress-bar-danger .progress-bar-fill {
-  @apply bg-red-600 shadow-red-500/30;
+  @apply bg-red-600 shadow-lg shadow-red-500/40;
 }
 
 /* Professional tooltips */
@@ -491,36 +491,36 @@
 
 /* Professional text styles */
 .text-professional-heading {
-  @apply text-slate-900 font-bold tracking-tight;
+  @apply text-slate-900 font-black tracking-tight;
 }
 
 .text-professional-body {
-  @apply text-slate-700 leading-relaxed font-medium;
+  @apply text-slate-800 leading-relaxed font-semibold;
 }
 
 .text-professional-caption {
-  @apply text-slate-600 text-sm font-medium;
+  @apply text-slate-700 text-sm font-semibold;
 }
 
 .text-professional-muted {
-  @apply text-slate-500 text-sm font-medium;
+  @apply text-slate-600 text-sm font-semibold;
 }
 
 /* Dark mode text styles */
 .dark .text-professional-heading {
-  @apply text-white font-bold;
+  @apply text-white font-black;
 }
 
 .dark .text-professional-body {
-  @apply text-slate-200 font-medium;
+  @apply text-slate-100 font-semibold;
 }
 
 .dark .text-professional-caption {
-  @apply text-slate-300 font-medium;
+  @apply text-slate-200 font-semibold;
 }
 
 .dark .text-professional-muted {
-  @apply text-slate-400 font-medium;
+  @apply text-slate-300 font-semibold;
 }
 
 /* Cyber theme specific effects */
