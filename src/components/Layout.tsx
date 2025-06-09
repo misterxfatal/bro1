@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { Shield, BookOpen, Award, Users, LogOut, Code, Home, Settings, Menu, X } from 'lucide-react';
+import { Shield, BookOpen, Award, Users, LogOut, Code, Home, Settings, Menu, X, Zap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,7 +8,7 @@ import { database } from '../db/database';
 
 const Layout: React.FC = () => {
   const { currentUser, logout } = useAuth();
-  const { currentTheme } = useTheme();
+  const { currentTheme, isDark } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const [userXP, setUserXP] = useState(currentUser?.xp || 0);
@@ -96,32 +96,56 @@ const Layout: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMobileMenuOpen]);
 
+  const calculateLevel = () => {
+    const xpPerLevel = 1000;
+    const currentLevel = Math.floor(userXP / xpPerLevel);
+    const progress = (userXP % xpPerLevel) / xpPerLevel * 100;
+    return {
+      level: currentLevel + 1,
+      progress,
+      nextLevelXP: (currentLevel + 1) * xpPerLevel,
+      remainingXP: (currentLevel + 1) * xpPerLevel - userXP
+    };
+  };
+
+  const levelInfo = calculateLevel();
+
   return (
-    <div className={`flex min-h-screen ${currentTheme.bgPrimary}`}>
+    <div className={`flex min-h-screen ${currentTheme.bgPrimary} transition-colors duration-300`}>
       {/* Mobile Header */}
       <motion.div
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`lg:hidden fixed top-0 left-0 right-0 z-40 ${currentTheme.bgSecondary} ${
-          isScrolled ? 'shadow-lg' : ''
-        } transition-all duration-300 border-b ${currentTheme.border}`}
+        className={`lg:hidden fixed top-0 left-0 right-0 z-40 ${
+          isScrolled ? 'glass-effect' : currentTheme.bgSecondary
+        } ${currentTheme.border} border-b transition-all duration-300`}
       >
         <div className="flex items-center justify-between px-4 py-3 sm:px-6">
           <button
             onClick={toggleMobileMenu}
-            className={`p-2 rounded-lg ${currentTheme.buttonSecondary} touch-manipulation`}
+            className={`p-2.5 rounded-xl ${currentTheme.buttonSecondary} touch-manipulation`}
             aria-label="Toggle menu"
           >
-            <Menu className={`h-6 w-6 ${currentTheme.text}`} />
+            <Menu className={`h-5 w-5 ${currentTheme.text}`} />
           </button>
-          <div className="flex items-center space-x-2 min-w-0">
-            <Shield className={`h-6 w-6 ${currentTheme.text}`} />
-            <span className={`font-bold ${currentTheme.text} text-sm sm:text-base truncate`}>NetSpectres</span>
+          <div className="flex items-center space-x-3 min-w-0">
+            <div className={`p-2 rounded-xl ${currentTheme.surface}`}>
+              <Shield className={`h-5 w-5 ${currentTheme.text}`} />
+            </div>
+            <div className="min-w-0">
+              <span className={`font-semibold ${currentTheme.text} text-sm sm:text-base truncate block`}>
+                NetSpectres Academy
+              </span>
+              <span className={`${currentTheme.textMuted} text-xs hidden sm:block`}>
+                Level {levelInfo.level}
+              </span>
+            </div>
           </div>
-          <div className="w-10 flex justify-end">
-            <div className={`text-xs ${currentTheme.text} opacity-75 hidden sm:block`}>
+          <div className="flex items-center space-x-2">
+            <div className={`text-xs ${currentTheme.textMuted} hidden sm:block`}>
               {userXP} XP
             </div>
+            <div className={`w-2 h-2 rounded-full ${currentTheme.success.replace('text-', 'bg-')}`}></div>
           </div>
         </div>
       </motion.div>
@@ -134,74 +158,94 @@ const Layout: React.FC = () => {
             animate={{ x: 0 }}
             className={`relative w-72 sm:w-80 lg:w-72 h-screen ${currentTheme.bgSecondary} ${
               currentTheme.text
-            } flex flex-col shadow-xl`}
+            } flex flex-col ${currentTheme.shadow} border-r ${currentTheme.border}`}
           >
             <div className="flex-1 overflow-y-auto">
-              <div className="p-4 sm:p-6">
+              <div className="p-6">
                 <motion.div
-                  className="flex items-center space-x-2"
-                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center space-x-3 mb-6"
+                  whileHover={{ scale: 1.02 }}
                 >
-                  <Shield className={`h-8 w-8 ${currentTheme.text}`} />
-                  <h1 className="text-lg sm:text-xl font-bold truncate">NetSpectres Academy</h1>
+                  <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
+                    <Shield className={`h-6 w-6 ${currentTheme.text}`} />
+                  </div>
+                  <div>
+                    <h1 className="text-lg font-semibold truncate">NetSpectres Academy</h1>
+                    <p className={`text-sm ${currentTheme.textMuted}`}>Cybersecurity Training</p>
+                  </div>
                 </motion.div>
                 
-                <div className={`mt-6 border-t border-opacity-20 pt-4 ${currentTheme.border}`}>
-                  <p className={`text-sm ${currentTheme.text} opacity-75`}>Logged in as</p>
-                  <p className="font-medium truncate">{currentUser?.username}</p>
-                  <div className="mt-3">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className={`text-sm ${currentTheme.text} opacity-75`}>XP:</span>
-                      <span className={`${currentTheme.text} font-bold`}>{userXP}</span>
+                <div className={`p-4 rounded-xl ${currentTheme.surface} mb-6`}>
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className={`w-10 h-10 rounded-full ${currentTheme.bgPrimary} flex items-center justify-center`}>
+                      <span className={`text-sm font-semibold ${currentTheme.text}`}>
+                        {currentUser?.username?.charAt(0).toUpperCase()}
+                      </span>
                     </div>
-                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div className="flex-1 min-w-0">
+                      <p className={`font-medium ${currentTheme.text} truncate`}>{currentUser?.username}</p>
+                      <p className={`text-sm ${currentTheme.textMuted}`}>Level {levelInfo.level}</p>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Zap className={`h-4 w-4 ${currentTheme.warning}`} />
+                      <span className={`text-sm font-semibold ${currentTheme.text}`}>{userXP}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-xs">
+                      <span className={currentTheme.textMuted}>Progress to Level {levelInfo.level + 1}</span>
+                      <span className={currentTheme.textMuted}>{levelInfo.remainingXP} XP remaining</span>
+                    </div>
+                    <div className={`progress-bar ${currentTheme.surface}`}>
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: `${Math.min((userXP / 1000) * 100, 100)}%` }}
-                        className={`h-full ${currentTheme.buttonPrimary}`}
-                        transition={{ duration: 1 }}
+                        animate={{ width: `${levelInfo.progress}%` }}
+                        className="progress-bar-fill bg-gradient-to-r from-blue-500 to-purple-600"
+                        transition={{ duration: 1, ease: "easeOut" }}
                       />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <nav className="px-2 sm:px-4">
-                {[...navItems, { to: "/settings", icon: Settings, label: "Settings" }].map(({ to, icon: Icon, label }) => (
-                  <motion.div
-                    key={to}
-                    whileHover={{ x: 5 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <NavLink
-                      to={to}
-                      className={({ isActive }) =>
-                        `flex items-center px-4 py-3 rounded-lg mb-1 transition-all duration-200 touch-manipulation ${
-                          isActive
-                            ? `${currentTheme.buttonPrimary}`
-                            : `${currentTheme.text} opacity-75 hover:opacity-100`
-                        }`
-                      }
-                      end
+              <nav className="px-4 pb-4">
+                <div className="space-y-1">
+                  {[...navItems, { to: "/settings", icon: Settings, label: "Settings" }].map(({ to, icon: Icon, label }) => (
+                    <motion.div
+                      key={to}
+                      whileHover={{ x: 4 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      <Icon className="h-5 w-5 mr-3" />
-                      <span className="truncate">{label}</span>
-                    </NavLink>
-                  </motion.div>
-                ))}
+                      <NavLink
+                        to={to}
+                        className={({ isActive }) =>
+                          `flex items-center px-4 py-3 rounded-xl transition-all duration-200 touch-manipulation group ${
+                            isActive
+                              ? `${currentTheme.buttonPrimary}`
+                              : `${currentTheme.text} opacity-70 hover:opacity-100 ${currentTheme.surfaceHover}`
+                          }`
+                        }
+                        end
+                      >
+                        <Icon className="h-5 w-5 mr-3 transition-transform group-hover:scale-110" />
+                        <span className="font-medium truncate">{label}</span>
+                      </NavLink>
+                    </motion.div>
+                  ))}
+                </div>
               </nav>
             </div>
 
             <motion.div
-              className={`p-4 sm:p-6 border-t ${currentTheme.border}`}
-              whileHover={{ scale: 1.02 }}
+              className={`p-4 border-t ${currentTheme.divider}`}
+              whileHover={{ scale: 1.01 }}
             >
               <button
                 onClick={handleLogout}
-                className={`flex items-center w-full px-4 py-3 rounded-lg ${currentTheme.text} opacity-75 hover:opacity-100 hover:bg-opacity-10 hover:bg-white transition-all duration-200 touch-manipulation`}
+                className={`flex items-center w-full px-4 py-3 rounded-xl ${currentTheme.text} opacity-70 hover:opacity-100 ${currentTheme.surfaceHover} transition-all duration-200 touch-manipulation group`}
               >
-                <LogOut className="h-5 w-5 mr-3" />
-                <span className="truncate">Logout</span>
+                <LogOut className="h-5 w-5 mr-3 transition-transform group-hover:scale-110" />
+                <span className="font-medium truncate">Logout</span>
               </button>
             </motion.div>
           </motion.div>
@@ -216,7 +260,7 @@ const Layout: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-50 z-40"
+              className="fixed inset-0 bg-black bg-opacity-50 z-40 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
@@ -225,38 +269,46 @@ const Layout: React.FC = () => {
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className={`mobile-menu fixed bottom-0 left-0 right-0 ${currentTheme.bgSecondary} z-50 rounded-t-2xl shadow-2xl max-h-96 overflow-y-auto`}
+              className={`mobile-menu fixed bottom-0 left-0 right-0 ${currentTheme.bgSecondary} z-50 rounded-t-3xl ${currentTheme.shadow} max-h-96 overflow-y-auto`}
             >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center space-x-3">
-                    <Shield className={`h-8 w-8 ${currentTheme.text}`} />
+                    <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
+                      <Shield className={`h-6 w-6 ${currentTheme.text}`} />
+                    </div>
                     <div>
-                      <h2 className={`text-lg font-bold ${currentTheme.text}`}>NetSpectres</h2>
-                      <p className={`text-sm ${currentTheme.text} opacity-75`}>{currentUser?.username}</p>
+                      <h2 className={`text-lg font-semibold ${currentTheme.text}`}>NetSpectres</h2>
+                      <p className={`text-sm ${currentTheme.textMuted}`}>{currentUser?.username}</p>
                     </div>
                   </div>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`p-2 rounded-lg ${currentTheme.buttonSecondary}`}
+                    className={`p-2 rounded-xl ${currentTheme.buttonSecondary}`}
                   >
-                    <X className={`h-6 w-6 ${currentTheme.text}`} />
+                    <X className={`h-5 w-5 ${currentTheme.text}`} />
                   </button>
                 </div>
 
-                <div className="space-y-2 mb-6">
-                  <div className="flex justify-between items-center">
-                    <span className={`text-sm ${currentTheme.text} opacity-75`}>XP Progress</span>
-                    <span className={`${currentTheme.text} font-bold`}>{userXP}</span>
+                <div className={`p-4 rounded-xl ${currentTheme.surface} mb-6`}>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className={`text-sm ${currentTheme.textMuted}`}>Level {levelInfo.level} Progress</span>
+                    <div className="flex items-center space-x-1">
+                      <Zap className={`h-4 w-4 ${currentTheme.warning}`} />
+                      <span className={`font-semibold ${currentTheme.text}`}>{userXP}</span>
+                    </div>
                   </div>
-                  <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                  <div className={`progress-bar ${currentTheme.surface}`}>
                     <motion.div
                       initial={{ width: 0 }}
-                      animate={{ width: `${Math.min((userXP / 1000) * 100, 100)}%` }}
-                      className={`h-full ${currentTheme.buttonPrimary}`}
+                      animate={{ width: `${levelInfo.progress}%` }}
+                      className="progress-bar-fill bg-gradient-to-r from-blue-500 to-purple-600"
                       transition={{ duration: 1 }}
                     />
                   </div>
+                  <p className={`text-xs ${currentTheme.textMuted} mt-1`}>
+                    {levelInfo.remainingXP} XP to next level
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -264,23 +316,23 @@ const Layout: React.FC = () => {
                     to="/settings"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={({ isActive }) =>
-                      `flex items-center px-4 py-3 rounded-lg transition-all duration-200 ${
+                      `flex items-center px-4 py-3 rounded-xl transition-all duration-200 ${
                         isActive
                           ? `${currentTheme.buttonPrimary}`
-                          : `${currentTheme.text} opacity-75 hover:opacity-100`
+                          : `${currentTheme.text} opacity-75 hover:opacity-100 ${currentTheme.surfaceHover}`
                       }`
                     }
                   >
                     <Settings className="h-5 w-5 mr-3" />
-                    <span>Settings</span>
+                    <span className="font-medium">Settings</span>
                   </NavLink>
 
                   <button
                     onClick={handleLogout}
-                    className={`flex items-center w-full px-4 py-3 rounded-lg ${currentTheme.text} opacity-75 hover:opacity-100 hover:bg-opacity-10 hover:bg-white transition-all duration-200`}
+                    className={`flex items-center w-full px-4 py-3 rounded-xl ${currentTheme.text} opacity-75 hover:opacity-100 ${currentTheme.surfaceHover} transition-all duration-200`}
                   >
                     <LogOut className="h-5 w-5 mr-3" />
-                    <span>Logout</span>
+                    <span className="font-medium">Logout</span>
                   </button>
                 </div>
               </div>
@@ -294,7 +346,7 @@ const Layout: React.FC = () => {
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
-          className={`fixed bottom-0 left-0 right-0 ${currentTheme.bgSecondary} border-t ${currentTheme.border} z-30 safe-area-inset-bottom`}
+          className={`fixed bottom-0 left-0 right-0 mobile-bottom-nav z-30 safe-area-inset-bottom`}
         >
           <div className="flex items-center justify-around px-2 py-2">
             {navItems.map(({ to, icon: Icon, label }) => {
@@ -304,10 +356,10 @@ const Layout: React.FC = () => {
                 <NavLink
                   key={to}
                   to={to}
-                  className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200 touch-manipulation min-w-0 flex-1 ${
+                  className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-200 touch-manipulation min-w-0 flex-1 mx-1 ${
                     isActive
-                      ? `${currentTheme.buttonPrimary} shadow-lg`
-                      : `${currentTheme.text} opacity-60 hover:opacity-100`
+                      ? `${currentTheme.buttonPrimary} transform -translate-y-1`
+                      : `${currentTheme.text} opacity-60 hover:opacity-100 ${currentTheme.surfaceHover}`
                   }`}
                 >
                   <Icon className={`h-5 w-5 mb-1 ${isActive ? 'text-white' : currentTheme.text}`} />
@@ -327,7 +379,7 @@ const Layout: React.FC = () => {
         animate={{ opacity: 1 }}
         className="flex-1 min-w-0 w-full"
       >
-        <main className={`p-3 sm:p-4 lg:p-6 transition-all duration-200 ${
+        <main className={`p-4 sm:p-6 lg:p-8 transition-all duration-200 ${
           isMobile ? 'mt-16 mb-20' : 'mt-16 lg:mt-0'
         } min-h-screen`}>
           <div className="max-w-7xl mx-auto w-full">

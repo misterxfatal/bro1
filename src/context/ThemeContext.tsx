@@ -14,53 +14,89 @@ type Theme = {
   border: string;
   highlight: string;
   shadow: string;
+  textMuted: string;
+  textCaption: string;
+  surface: string;
+  surfaceHover: string;
+  divider: string;
+  success: string;
+  warning: string;
+  danger: string;
+  info: string;
 };
 
 const themes: Record<string, Theme> = {
   light: {
-    name: 'Light',
-    bgPrimary: 'bg-white',
-    bgSecondary: 'bg-gray-50',
-    text: 'text-gray-900',
-    accent: 'blue',
-    buttonPrimary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-200',
-    buttonSecondary: 'bg-gray-200 hover:bg-gray-300 text-gray-800 shadow-md hover:shadow-lg transition-all duration-200',
+    name: 'Professional Light',
+    bgPrimary: 'bg-slate-50',
+    bgSecondary: 'bg-white',
+    text: 'text-slate-900',
+    accent: 'slate',
+    buttonPrimary: 'bg-slate-900 hover:bg-slate-800 text-white shadow-professional hover:shadow-professional-lg transition-all duration-200 font-medium',
+    buttonSecondary: 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 shadow-professional hover:shadow-professional-lg transition-all duration-200 font-medium',
     bgAnimation: 'light-bg',
-    gradient: 'from-blue-500 to-blue-600',
+    gradient: 'from-slate-900 to-slate-700',
     cardBg: 'bg-white',
-    border: 'border-gray-200',
-    highlight: 'bg-blue-50',
-    shadow: 'shadow-lg hover:shadow-xl'
+    border: 'border-slate-200',
+    highlight: 'bg-slate-50',
+    shadow: 'shadow-professional hover:shadow-professional-lg',
+    textMuted: 'text-slate-500',
+    textCaption: 'text-slate-600',
+    surface: 'bg-slate-100',
+    surfaceHover: 'hover:bg-slate-200',
+    divider: 'border-slate-200',
+    success: 'text-emerald-600',
+    warning: 'text-amber-600',
+    danger: 'text-red-600',
+    info: 'text-blue-600'
   },
   dark: {
-    name: 'Dark',
-    bgPrimary: 'bg-gray-900',
-    bgSecondary: 'bg-gray-800',
+    name: 'Professional Dark',
+    bgPrimary: 'bg-slate-900',
+    bgSecondary: 'bg-slate-800',
     text: 'text-white',
-    accent: 'purple',
-    buttonPrimary: 'bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200',
-    buttonSecondary: 'bg-gray-700 hover:bg-gray-600 text-white shadow-md hover:shadow-lg transition-all duration-200',
+    accent: 'slate',
+    buttonPrimary: 'bg-white hover:bg-slate-100 text-slate-900 shadow-professional hover:shadow-professional-lg transition-all duration-200 font-medium',
+    buttonSecondary: 'bg-slate-700 hover:bg-slate-600 text-white border border-slate-600 shadow-professional hover:shadow-professional-lg transition-all duration-200 font-medium',
     bgAnimation: 'dark-bg',
-    gradient: 'from-purple-500 to-purple-600',
-    cardBg: 'bg-gray-800',
-    border: 'border-gray-700',
-    highlight: 'bg-purple-900',
-    shadow: 'shadow-lg hover:shadow-xl'
+    gradient: 'from-slate-100 to-white',
+    cardBg: 'bg-slate-800',
+    border: 'border-slate-700',
+    highlight: 'bg-slate-700',
+    shadow: 'shadow-professional-lg hover:shadow-professional-xl',
+    textMuted: 'text-slate-400',
+    textCaption: 'text-slate-300',
+    surface: 'bg-slate-700',
+    surfaceHover: 'hover:bg-slate-600',
+    divider: 'border-slate-700',
+    success: 'text-emerald-400',
+    warning: 'text-amber-400',
+    danger: 'text-red-400',
+    info: 'text-blue-400'
   },
-  cyberpunk: {
-    name: 'Cyberpunk',
-    bgPrimary: 'bg-black',
-    bgSecondary: 'bg-gray-900',
-    text: 'text-green-400',
-    accent: 'green',
-    buttonPrimary: 'bg-green-500 hover:bg-green-600 text-black shadow-lg hover:shadow-xl transition-all duration-200',
-    buttonSecondary: 'bg-gray-800 hover:bg-gray-700 text-green-400 shadow-md hover:shadow-lg transition-all duration-200',
-    bgAnimation: 'cyber-bg',
-    gradient: 'from-green-400 to-green-500',
-    cardBg: 'bg-gray-900',
-    border: 'border-green-500',
-    highlight: 'bg-green-900',
-    shadow: 'shadow-lg hover:shadow-xl shadow-green-500/20'
+  modern: {
+    name: 'Modern Blue',
+    bgPrimary: 'bg-blue-50',
+    bgSecondary: 'bg-white',
+    text: 'text-slate-900',
+    accent: 'blue',
+    buttonPrimary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-professional hover:shadow-professional-lg transition-all duration-200 font-medium',
+    buttonSecondary: 'bg-white hover:bg-blue-50 text-blue-700 border border-blue-300 shadow-professional hover:shadow-professional-lg transition-all duration-200 font-medium',
+    bgAnimation: 'modern-bg',
+    gradient: 'from-blue-600 to-blue-700',
+    cardBg: 'bg-white',
+    border: 'border-blue-200',
+    highlight: 'bg-blue-50',
+    shadow: 'shadow-professional hover:shadow-professional-lg',
+    textMuted: 'text-slate-500',
+    textCaption: 'text-slate-600',
+    surface: 'bg-blue-100',
+    surfaceHover: 'hover:bg-blue-200',
+    divider: 'border-blue-200',
+    success: 'text-emerald-600',
+    warning: 'text-amber-600',
+    danger: 'text-red-600',
+    info: 'text-blue-600'
   }
 };
 
@@ -68,35 +104,47 @@ type ThemeContextType = {
   currentTheme: Theme;
   setTheme: (themeName: string) => void;
   availableThemes: typeof themes;
+  isDark: boolean;
 };
 
 const ThemeContext = createContext<ThemeContextType>({
   currentTheme: themes.light,
   setTheme: () => {},
-  availableThemes: themes
+  availableThemes: themes,
+  isDark: false
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTheme, setCurrentTheme] = useState<Theme>(themes.light);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme && themes[savedTheme]) {
       setCurrentTheme(themes[savedTheme]);
+      setIsDark(savedTheme === 'dark');
     }
   }, []);
 
   const setTheme = (themeName: string) => {
     if (themes[themeName]) {
       setCurrentTheme(themes[themeName]);
+      setIsDark(themeName === 'dark');
       localStorage.setItem('theme', themeName);
+      
+      // Update document class for dark mode
+      if (themeName === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   };
 
   return (
-    <ThemeContext.Provider value={{ currentTheme, setTheme, availableThemes: themes }}>
+    <ThemeContext.Provider value={{ currentTheme, setTheme, availableThemes: themes, isDark }}>
       {children}
     </ThemeContext.Provider>
   );

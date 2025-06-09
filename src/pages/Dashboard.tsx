@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Award, Zap, Calendar, ArrowRight, Loader } from 'lucide-react';
+import { BookOpen, Award, Zap, Calendar, ArrowRight, Loader, TrendingUp, Target, Clock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { Module, Badge, Progress } from '../types';
@@ -91,7 +91,7 @@ const Dashboard: React.FC = () => {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <Loader className={`h-8 w-8 ${currentTheme.text} animate-spin mx-auto mb-4`} />
-          <p className={`${currentTheme.text}`}>Loading your dashboard...</p>
+          <p className={`${currentTheme.textMuted}`}>Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -129,138 +129,219 @@ const Dashboard: React.FC = () => {
   const levelInfo = calculateLevelProgress();
   
   return (
-    <div className="max-w-6xl mx-auto">
-      <motion.h1 
+    <div className="max-w-7xl mx-auto space-professional">
+      {/* Welcome Header */}
+      <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 px-2 sm:px-0"
+        className="mb-8"
       >
-        Welcome back, {currentUser.username}!
-      </motion.h1>
+        <h1 className={`text-3xl sm:text-4xl font-bold ${currentTheme.text} mb-2`}>
+          Welcome back, {currentUser.username}! 👋
+        </h1>
+        <p className={`text-lg ${currentTheme.textMuted}`}>
+          Ready to continue your cybersecurity journey?
+        </p>
+      </motion.div>
       
       {/* Stats Overview */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8 px-2 sm:px-0"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
       >
-        <div className="bg-white rounded-lg shadow p-4 sm:p-6">
-          <div className="flex items-center">
-            <div className="p-3 rounded-full bg-blue-100 text-blue-500 mr-4">
-              <BookOpen className="h-6 w-6" />
+        <div className={`card-professional p-6`}>
+          <div className="flex items-center justify-between mb-4">
+            <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
+              <BookOpen className={`h-6 w-6 ${currentTheme.info}`} />
             </div>
-            <div>
-              <p className="text-sm text-gray-500">Completed Modules</p>
-              <p className="text-xl sm:text-2xl font-bold">
-                {completedModulesCount} / {modules.length}
-              </p>
+            <div className={`badge-professional-primary`}>
+              {Math.round((completedModulesCount / modules.length) * 100)}%
             </div>
+          </div>
+          <div>
+            <p className={`text-2xl font-bold ${currentTheme.text} mb-1`}>
+              {completedModulesCount}
+            </p>
+            <p className={`text-sm ${currentTheme.textMuted}`}>
+              Modules Completed
+            </p>
+            <p className={`text-xs ${currentTheme.textCaption} mt-1`}>
+              of {modules.length} total
+            </p>
           </div>
         </div>
         
-        <div className="bg-white rounded-lg shadow p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
-          <div className="flex items-center">
-            <div className="p-3 rounded-full bg-green-100 text-green-500 mr-4">
-              <Zap className="h-6 w-6" />
+        <div className={`card-professional p-6`}>
+          <div className="flex items-center justify-between mb-4">
+            <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
+              <Zap className={`h-6 w-6 ${currentTheme.warning}`} />
             </div>
-            <div className="flex-1">
-              <div className="flex justify-between items-baseline">
-                <p className="text-sm text-gray-500">Level {levelInfo.level}</p>
-                <p className="text-sm text-gray-500">{currentUser.xp} XP</p>
-              </div>
-              <div className="mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div className={`badge-professional-warning`}>
+              Level {levelInfo.level}
+            </div>
+          </div>
+          <div>
+            <p className={`text-2xl font-bold ${currentTheme.text} mb-1`}>
+              {currentUser.xp}
+            </p>
+            <p className={`text-sm ${currentTheme.textMuted}`}>
+              Experience Points
+            </p>
+            <div className="mt-3">
+              <div className={`progress-bar`}>
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: `${levelInfo.progress}%` }}
-                  className="h-full bg-green-500 transition-all duration-300"
+                  className="progress-bar-fill bg-gradient-to-r from-amber-500 to-orange-600"
+                  transition={{ duration: 1, ease: "easeOut" }}
                 />
               </div>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className={`text-xs ${currentTheme.textCaption} mt-1`}>
                 {levelInfo.remainingXP} XP to level {levelInfo.level + 1}
               </p>
             </div>
           </div>
         </div>
         
-        <div className="bg-white rounded-lg shadow p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
-          <div className="flex items-center">
-            <div className="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
-              <Award className="h-6 w-6" />
+        <div className={`card-professional p-6`}>
+          <div className="flex items-center justify-between mb-4">
+            <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
+              <Award className={`h-6 w-6 ${currentTheme.success}`} />
             </div>
-            <div>
-              <p className="text-sm text-gray-500">Badges Earned</p>
-              <p className="text-xl sm:text-2xl font-bold">{badges.length}</p>
+            <div className={`badge-professional-success`}>
+              Earned
             </div>
+          </div>
+          <div>
+            <p className={`text-2xl font-bold ${currentTheme.text} mb-1`}>
+              {badges.length}
+            </p>
+            <p className={`text-sm ${currentTheme.textMuted}`}>
+              Badges Earned
+            </p>
+            <p className={`text-xs ${currentTheme.textCaption} mt-1`}>
+              Keep learning to earn more!
+            </p>
+          </div>
+        </div>
+
+        <div className={`card-professional p-6`}>
+          <div className="flex items-center justify-between mb-4">
+            <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
+              <TrendingUp className={`h-6 w-6 ${currentTheme.info}`} />
+            </div>
+            <div className={`badge-professional-primary`}>
+              Active
+            </div>
+          </div>
+          <div>
+            <p className={`text-2xl font-bold ${currentTheme.text} mb-1`}>
+              {progress.filter(p => !p.completed).length}
+            </p>
+            <p className={`text-sm ${currentTheme.textMuted}`}>
+              In Progress
+            </p>
+            <p className={`text-xs ${currentTheme.textCaption} mt-1`}>
+              Modules started
+            </p>
           </div>
         </div>
       </motion.div>
       
-      {/* Recent Activity and Recommended Modules */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 px-2 sm:px-0">
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Activity */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="bg-white rounded-lg shadow"
+          className="lg:col-span-2"
         >
-          <div className="border-b px-4 sm:px-6 py-3 sm:py-4">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Recent Activity</h2>
-          </div>
-          
-          <div className="p-4 sm:p-6">
-            <AnimatePresence mode="wait">
-              {progress.filter(item => item.completed).length > 0 ? (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="space-y-4"
+          <div className={`card-professional`}>
+            <div className="p-6 border-b ${currentTheme.divider}">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className={`p-2 rounded-lg ${currentTheme.surface}`}>
+                    <Clock className={`h-5 w-5 ${currentTheme.text}`} />
+                  </div>
+                  <h2 className={`text-xl font-semibold ${currentTheme.text}`}>Recent Activity</h2>
+                </div>
+                <Link 
+                  to="/modules" 
+                  className={`text-sm ${currentTheme.info} hover:underline`}
                 >
-                  {progress
-                    .filter(item => item.completed)
-                    .sort((a, b) => new Date(b.last_attempt).getTime() - new Date(a.last_attempt).getTime())
-                    .slice(0, 5)
-                    .map((item, index) => (
-                      <motion.div
-                        key={item.module_id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-start"
-                      >
-                        <div className="p-2 rounded-full bg-gray-100 text-gray-500 mr-3">
-                          <Calendar className="h-5 w-5" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="font-medium text-gray-800 text-sm sm:text-base">
-                            Completed module: {item.module_title}
-                          </p>
-                          <p className="text-sm text-gray-500">
-                            Score: {item.score}% • {formatDate(item.last_attempt)}
-                          </p>
-                        </div>
-                      </motion.div>
-                    ))}
-                </motion.div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-center py-8"
-                >
-                  <Calendar className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                  <p className="text-gray-500">No completed modules yet. Start learning!</p>
-                  <Link 
-                    to="/modules" 
-                    className="inline-flex items-center mt-4 text-blue-500 hover:text-blue-700 touch-manipulation"
+                  View all modules
+                </Link>
+              </div>
+            </div>
+            
+            <div className="p-6">
+              <AnimatePresence mode="wait">
+                {progress.filter(item => item.completed).length > 0 ? (
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="space-y-4"
                   >
-                    Browse modules
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    {progress
+                      .filter(item => item.completed)
+                      .sort((a, b) => new Date(b.last_attempt).getTime() - new Date(a.last_attempt).getTime())
+                      .slice(0, 5)
+                      .map((item, index) => (
+                        <motion.div
+                          key={item.module_id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className={`flex items-center space-x-4 p-4 rounded-xl ${currentTheme.surface} hover:${currentTheme.surfaceHover} transition-colors`}
+                        >
+                          <div className={`p-2 rounded-lg ${currentTheme.success.replace('text-', 'bg-')} bg-opacity-10`}>
+                            <Award className={`h-5 w-5 ${currentTheme.success}`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className={`font-medium ${currentTheme.text} text-sm sm:text-base truncate`}>
+                              Completed: {item.module_title}
+                            </p>
+                            <div className="flex items-center space-x-4 mt-1">
+                              <span className={`text-sm ${currentTheme.success} font-medium`}>
+                                Score: {item.score}%
+                              </span>
+                              <span className={`text-sm ${currentTheme.textMuted}`}>
+                                {formatDate(item.last_attempt)}
+                              </span>
+                            </div>
+                          </div>
+                          <div className={`badge-professional-success`}>
+                            ✓
+                          </div>
+                        </motion.div>
+                      ))}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="text-center py-12"
+                  >
+                    <div className={`p-4 rounded-full ${currentTheme.surface} w-16 h-16 mx-auto mb-4 flex items-center justify-center`}>
+                      <Calendar className={`h-8 w-8 ${currentTheme.textMuted}`} />
+                    </div>
+                    <h3 className={`text-lg font-medium ${currentTheme.text} mb-2`}>No completed modules yet</h3>
+                    <p className={`${currentTheme.textMuted} mb-4`}>Start your learning journey today!</p>
+                    <Link 
+                      to="/modules" 
+                      className={`${currentTheme.buttonPrimary} inline-flex items-center space-x-2 touch-manipulation`}
+                    >
+                      <BookOpen className="h-4 w-4" />
+                      <span>Browse Modules</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
         
@@ -268,63 +349,87 @@ const Dashboard: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="bg-white rounded-lg shadow"
+          className="lg:col-span-1"
         >
-          <div className="border-b px-4 sm:px-6 py-3 sm:py-4">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Recommended Modules</h2>
-          </div>
-          
-          <div className="p-4 sm:p-6">
-            <AnimatePresence mode="wait">
-              {recommendedModules.length > 0 ? (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="space-y-4"
-                >
-                  {recommendedModules.map((module, index) => (
-                    <motion.div
-                      key={module.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link 
-                        to={`/modules/${module.id}`}
-                        className="block bg-gray-50 hover:bg-gray-100 rounded-lg p-3 sm:p-4 transition touch-manipulation"
+          <div className={`card-professional`}>
+            <div className="p-6 border-b ${currentTheme.divider}">
+              <div className="flex items-center space-x-3">
+                <div className={`p-2 rounded-lg ${currentTheme.surface}`}>
+                  <Target className={`h-5 w-5 ${currentTheme.text}`} />
+                </div>
+                <h2 className={`text-xl font-semibold ${currentTheme.text}`}>Recommended</h2>
+              </div>
+            </div>
+            
+            <div className="p-6">
+              <AnimatePresence mode="wait">
+                {recommendedModules.length > 0 ? (
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="space-y-4"
+                  >
+                    {recommendedModules.map((module, index) => (
+                      <motion.div
+                        key={module.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
                       >
-                        <div className="flex justify-between items-center">
-                          <div className="min-w-0 flex-1 mr-3">
-                            <h3 className="font-medium text-gray-800 text-sm sm:text-base truncate">{module.title}</h3>
-                            <p className="text-sm text-gray-500">
-                              {module.category} • {module.difficulty}
-                            </p>
+                        <Link 
+                          to={`/modules/${module.id}`}
+                          className={`block p-4 rounded-xl ${currentTheme.surface} hover:${currentTheme.surfaceHover} transition-all duration-200 touch-manipulation group`}
+                        >
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex-1 min-w-0">
+                              <h3 className={`font-medium ${currentTheme.text} text-sm line-clamp-2 group-hover:${currentTheme.info} transition-colors`}>
+                                {module.title}
+                              </h3>
+                              <div className="flex items-center space-x-2 mt-1">
+                                <span className={`badge-professional-primary text-xs`}>
+                                  {module.category}
+                                </span>
+                                <span className={`text-xs ${currentTheme.textMuted}`}>
+                                  {module.difficulty}
+                                </span>
+                              </div>
+                            </div>
+                            <ArrowRight className={`h-4 w-4 ${currentTheme.textMuted} group-hover:${currentTheme.info} transition-colors flex-shrink-0 ml-2`} />
                           </div>
-                          <div className="flex items-center text-green-500 flex-shrink-0">
-                            <span className="mr-1">{module.xp_reward} XP</span>
-                            <ArrowRight className="h-4 w-4" />
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-1">
+                              <Zap className={`h-4 w-4 ${currentTheme.warning}`} />
+                              <span className={`text-sm font-medium ${currentTheme.text}`}>
+                                {module.xp_reward} XP
+                              </span>
+                            </div>
+                            <span className={`text-xs ${currentTheme.textCaption}`}>
+                              {Math.floor((module.time_limit || 0) / 60)} min
+                            </span>
                           </div>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-center py-8"
-                >
-                  <BookOpen className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                  <p className="text-gray-500">You've completed all available modules!</p>
-                  <p className="text-sm text-gray-400 mt-2">
-                    Check back later for new content.
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="text-center py-8"
+                  >
+                    <div className={`p-4 rounded-full ${currentTheme.surface} w-16 h-16 mx-auto mb-4 flex items-center justify-center`}>
+                      <BookOpen className={`h-8 w-8 ${currentTheme.textMuted}`} />
+                    </div>
+                    <h3 className={`text-lg font-medium ${currentTheme.text} mb-2`}>All caught up!</h3>
+                    <p className={`${currentTheme.textMuted} text-sm`}>
+                      You've completed all available modules. Check back later for new content!
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
       </div>

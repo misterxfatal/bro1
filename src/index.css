@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,13 +7,21 @@
 
 @layer base {
   body {
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    background: #fafbfc;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
   }
 
   /* Improve touch targets on mobile */
@@ -36,21 +44,81 @@
 
   /* Custom scrollbar for webkit browsers */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
+    background: #e2e8f0;
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #cbd5e1;
   }
+
+  /* Dark mode scrollbar */
+  .dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+  }
+}
+
+/* Professional glass morphism effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-effect-dark {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Professional shadows */
+.shadow-professional {
+  box-shadow: 
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.shadow-professional-lg {
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-professional-xl {
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Professional gradients */
+.gradient-professional {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-professional-success {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.gradient-professional-warning {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.gradient-professional-danger {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
 }
 
 /* Touch manipulation for better mobile experience */
@@ -59,6 +127,13 @@
 }
 
 /* Line clamp utilities for text truncation */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -73,53 +148,147 @@
   overflow: hidden;
 }
 
-.animated-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  transition: all 0.3s ease;
+/* Professional animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.light-bg {
-  background: linear-gradient(135deg, #f7f7f7 0%, #ffffff 100%);
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.dark-bg {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.cyber-bg {
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-  position: relative;
-  overflow: hidden;
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
-.cyber-bg::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0%,
-    rgba(0, 255, 0, 0.03) 50%,
-    transparent 100%
-  );
-  animation: scanline 8s linear infinite;
-}
-
-@keyframes scanline {
+@keyframes shimmer {
   0% {
-    transform: translateY(-100%);
+    background-position: -200px 0;
   }
   100% {
-    transform: translateY(100%);
+    background-position: calc(200px + 100%) 0;
   }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 0px,
+    #e0e0e0 40px,
+    #f0f0f0 80px
+  );
+  background-size: 200px;
+}
+
+/* Professional button styles */
+.btn-professional {
+  @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 touch-manipulation;
+}
+
+.btn-professional-primary {
+  @apply btn-professional bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-500 shadow-professional;
+}
+
+.btn-professional-secondary {
+  @apply btn-professional bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 focus:ring-slate-500 shadow-professional;
+}
+
+.btn-professional-success {
+  @apply btn-professional bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500 shadow-professional;
+}
+
+.btn-professional-danger {
+  @apply btn-professional bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-professional;
+}
+
+/* Professional card styles */
+.card-professional {
+  @apply bg-white rounded-xl border border-slate-200 shadow-professional transition-all duration-200;
+}
+
+.card-professional:hover {
+  @apply shadow-professional-lg transform -translate-y-1;
+}
+
+.card-professional-dark {
+  @apply bg-slate-800 border-slate-700 text-white;
+}
+
+/* Professional input styles */
+.input-professional {
+  @apply w-full px-3 py-2 text-sm border border-slate-300 rounded-lg bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-200;
+}
+
+.input-professional-dark {
+  @apply bg-slate-800 border-slate-600 text-white placeholder-slate-400 focus:ring-slate-400;
+}
+
+/* Professional badge styles */
+.badge-professional {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-professional-primary {
+  @apply badge-professional bg-slate-100 text-slate-800;
+}
+
+.badge-professional-success {
+  @apply badge-professional bg-emerald-100 text-emerald-800;
+}
+
+.badge-professional-warning {
+  @apply badge-professional bg-amber-100 text-amber-800;
+}
+
+.badge-professional-danger {
+  @apply badge-professional bg-red-100 text-red-800;
 }
 
 /* Responsive breakpoint utilities */
@@ -157,8 +326,10 @@
 /* Mobile bottom navigation specific styles */
 @media (max-width: 1023px) {
   .mobile-bottom-nav {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
   
   .mobile-nav-item {
@@ -167,9 +338,122 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
   }
   
   .mobile-nav-item.active {
     transform: translateY(-2px);
   }
+}
+
+/* Professional loading states */
+.loading-skeleton {
+  @apply animate-pulse bg-slate-200 rounded;
+}
+
+.loading-skeleton-dark {
+  @apply bg-slate-700;
+}
+
+/* Professional status indicators */
+.status-indicator {
+  @apply w-2 h-2 rounded-full;
+}
+
+.status-indicator-online {
+  @apply status-indicator bg-emerald-500;
+}
+
+.status-indicator-offline {
+  @apply status-indicator bg-slate-400;
+}
+
+.status-indicator-busy {
+  @apply status-indicator bg-red-500;
+}
+
+/* Professional progress bars */
+.progress-bar {
+  @apply w-full bg-slate-200 rounded-full h-2 overflow-hidden;
+}
+
+.progress-bar-fill {
+  @apply h-full bg-slate-900 rounded-full transition-all duration-300 ease-out;
+}
+
+.progress-bar-success .progress-bar-fill {
+  @apply bg-emerald-600;
+}
+
+.progress-bar-warning .progress-bar-fill {
+  @apply bg-amber-600;
+}
+
+.progress-bar-danger .progress-bar-fill {
+  @apply bg-red-600;
+}
+
+/* Professional tooltips */
+.tooltip {
+  @apply absolute z-50 px-2 py-1 text-xs font-medium text-white bg-slate-900 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-200;
+}
+
+.tooltip.show {
+  @apply opacity-100;
+}
+
+/* Professional dividers */
+.divider {
+  @apply border-t border-slate-200;
+}
+
+.divider-dark {
+  @apply border-slate-700;
+}
+
+/* Professional spacing utilities */
+.space-professional > * + * {
+  margin-top: 1.5rem;
+}
+
+.space-professional-sm > * + * {
+  margin-top: 1rem;
+}
+
+.space-professional-lg > * + * {
+  margin-top: 2rem;
+}
+
+/* Professional text styles */
+.text-professional-heading {
+  @apply text-slate-900 font-semibold tracking-tight;
+}
+
+.text-professional-body {
+  @apply text-slate-700 leading-relaxed;
+}
+
+.text-professional-caption {
+  @apply text-slate-500 text-sm;
+}
+
+.text-professional-muted {
+  @apply text-slate-400 text-sm;
+}
+
+/* Dark mode text styles */
+.dark .text-professional-heading {
+  @apply text-white;
+}
+
+.dark .text-professional-body {
+  @apply text-slate-300;
+}
+
+.dark .text-professional-caption {
+  @apply text-slate-400;
+}
+
+.dark .text-professional-muted {
+  @apply text-slate-500;
 }
