@@ -323,20 +323,20 @@
 
 /* Professional card styles */
 .card-professional {
-  @apply bg-white/98 backdrop-blur-xl rounded-xl border-2 border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1;
+  @apply bg-white/[.98] backdrop-blur-xl rounded-xl border-2 border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1;
 }
 
 .card-professional-dark {
-  @apply bg-slate-800/98 backdrop-blur-xl border-2 border-slate-700 text-white shadow-xl;
+  @apply bg-slate-800/[.98] backdrop-blur-xl border-2 border-slate-700 text-white shadow-xl;
 }
 
 /* Professional input styles */
 .input-professional {
-  @apply w-full px-4 py-3 text-sm border-2 border-slate-300 rounded-lg bg-white/98 backdrop-blur-sm text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-slate-500/30 focus:border-slate-600 transition-all duration-300 shadow-lg font-medium;
+  @apply w-full px-4 py-3 text-sm border-2 border-slate-300 rounded-lg bg-white/[.98] backdrop-blur-sm text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-slate-500/30 focus:border-slate-600 transition-all duration-300 shadow-lg font-medium;
 }
 
 .input-professional-dark {
-  @apply bg-slate-800/98 backdrop-blur-sm border-2 border-slate-600 text-white placeholder-slate-400 focus:ring-4 focus:ring-slate-400/30 focus:border-slate-500 shadow-lg font-medium;
+  @apply bg-slate-800/[.98] backdrop-blur-sm border-2 border-slate-600 text-white placeholder-slate-400 focus:ring-4 focus:ring-slate-400/30 focus:border-slate-500 shadow-lg font-medium;
 }
 
 /* Professional badge styles */
@@ -345,19 +345,19 @@
 }
 
 .badge-professional-primary {
-  @apply badge-professional bg-slate-100/95 text-slate-900 border-slate-300;
+  @apply badge-professional bg-slate-100/[.95] text-slate-900 border-slate-300;
 }
 
 .badge-professional-success {
-  @apply badge-professional bg-emerald-100/95 text-emerald-900 border-emerald-300;
+  @apply badge-professional bg-emerald-100/[.95] text-emerald-900 border-emerald-300;
 }
 
 .badge-professional-warning {
-  @apply badge-professional bg-amber-100/95 text-amber-900 border-amber-300;
+  @apply badge-professional bg-amber-100/[.95] text-amber-900 border-amber-300;
 }
 
 .badge-professional-danger {
-  @apply badge-professional bg-red-100/95 text-red-900 border-red-300;
+  @apply badge-professional bg-red-100/[.95] text-red-900 border-red-300;
 }
 
 /* Responsive breakpoint utilities */
@@ -413,11 +413,11 @@
 
 /* Professional loading states */
 .loading-skeleton {
-  @apply animate-pulse bg-slate-200/80 backdrop-blur-sm rounded;
+  @apply animate-pulse bg-slate-200/[.8] backdrop-blur-sm rounded;
 }
 
 .loading-skeleton-dark {
-  @apply bg-slate-700/80 backdrop-blur-sm;
+  @apply bg-slate-700/[.8] backdrop-blur-sm;
 }
 
 /* Professional status indicators */
@@ -439,7 +439,7 @@
 
 /* Professional progress bars */
 .progress-bar {
-  @apply w-full bg-slate-200/95 backdrop-blur-sm rounded-full h-3 overflow-hidden shadow-inner border-2 border-slate-300;
+  @apply w-full bg-slate-200/[.95] backdrop-blur-sm rounded-full h-3 overflow-hidden shadow-inner border-2 border-slate-300;
 }
 
 .progress-bar-fill {
@@ -460,7 +460,7 @@
 
 /* Professional tooltips */
 .tooltip {
-  @apply absolute z-50 px-2 py-1 text-xs font-medium text-white bg-slate-900/90 backdrop-blur-sm rounded shadow-professional-lg opacity-0 pointer-events-none transition-opacity duration-300;
+  @apply absolute z-50 px-2 py-1 text-xs font-medium text-white bg-slate-900/[.9] backdrop-blur-sm rounded shadow-professional-lg opacity-0 pointer-events-none transition-opacity duration-300;
 }
 
 .tooltip.show {
