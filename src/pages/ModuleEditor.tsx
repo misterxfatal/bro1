@@ -220,39 +220,39 @@ const ModuleEditor: React.FC = () => {
   }
   
   return (
-    <div className="max-w-4xl mx-auto px-4">
+    <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6">
       <button
         onClick={() => navigate('/modules')}
-        className={`inline-flex items-center ${currentTheme.text} hover:opacity-80 mb-6`}
+        className={`inline-flex items-center ${currentTheme.text} hover:opacity-80 mb-4 sm:mb-6 touch-manipulation`}
       >
         <ArrowLeft className="h-4 w-4 mr-1" />
         Back to Modules
       </button>
       
       <div className={`${currentTheme.bgSecondary} rounded-lg shadow-lg overflow-hidden`}>
-        <div className={`${currentTheme.buttonPrimary} p-4 sm:p-6 flex flex-col sm:flex-row justify-between items-center gap-4`}>
-          <h1 className={`text-xl sm:text-2xl font-bold ${currentTheme.text}`}>
+        <div className={`${currentTheme.buttonPrimary} p-4 sm:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4`}>
+          <h1 className={`text-lg sm:text-xl lg:text-2xl font-bold ${currentTheme.text}`}>
             {isEditing ? 'Edit Module' : 'Create New Module'}
           </h1>
           {isEditing && (
             <button
               onClick={handleDelete}
-              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 w-full sm:w-auto"
+              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 w-full sm:w-auto touch-manipulation text-sm sm:text-base"
             >
               Delete Module
             </button>
           )}
         </div>
         
-        <form onSubmit={handleSubmit} className="p-4 sm:p-6">
+        <form onSubmit={handleSubmit} className="p-3 sm:p-4 lg:p-6">
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <div className="bg-red-100 border border-red-400 text-red-700 px-3 sm:px-4 py-2 sm:py-3 rounded mb-4 text-sm sm:text-base">
               {error}
             </div>
           )}
           
-          <div className="mb-6">
-            <label className={`block ${currentTheme.text} font-medium mb-2`} htmlFor="title">
+          <div className="mb-4 sm:mb-6">
+            <label className={`block ${currentTheme.text} font-medium mb-2 text-sm sm:text-base`} htmlFor="title">
               Module Title
             </label>
             <input
@@ -260,28 +260,28 @@ const ModuleEditor: React.FC = () => {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+              className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
               placeholder="e.g., Introduction to Linux"
             />
           </div>
           
-          <div className="mb-6">
-            <label className={`block ${currentTheme.text} font-medium mb-2`} htmlFor="description">
+          <div className="mb-4 sm:mb-6">
+            <label className={`block ${currentTheme.text} font-medium mb-2 text-sm sm:text-base`} htmlFor="description">
               Description
             </label>
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
-              rows={4}
+              className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
+              rows={3}
               placeholder="Describe what users will learn in this module"
             ></textarea>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6">
             <div>
-              <label className={`block ${currentTheme.text} font-medium mb-2`} htmlFor="category">
+              <label className={`block ${currentTheme.text} font-medium mb-2 text-sm sm:text-base`} htmlFor="category">
                 Category
               </label>
               <input
@@ -289,20 +289,20 @@ const ModuleEditor: React.FC = () => {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
                 placeholder="e.g., Linux, Web, OSINT"
               />
             </div>
             
             <div>
-              <label className={`block ${currentTheme.text} font-medium mb-2`} htmlFor="difficulty">
+              <label className={`block ${currentTheme.text} font-medium mb-2 text-sm sm:text-base`} htmlFor="difficulty">
                 Difficulty
               </label>
               <select
                 id="difficulty"
                 value={difficulty}
                 onChange={(e) => setDifficulty(e.target.value)}
-                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
               >
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
@@ -311,7 +311,7 @@ const ModuleEditor: React.FC = () => {
             </div>
             
             <div>
-              <label className={`block ${currentTheme.text} font-medium mb-2`} htmlFor="xpReward">
+              <label className={`block ${currentTheme.text} font-medium mb-2 text-sm sm:text-base`} htmlFor="xpReward">
                 XP Reward
               </label>
               <input
@@ -320,12 +320,12 @@ const ModuleEditor: React.FC = () => {
                 value={xpReward}
                 onChange={(e) => setXpReward(parseInt(e.target.value))}
                 min="1"
-                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
               />
             </div>
 
             <div>
-              <label className={`block ${currentTheme.text} font-medium mb-2`} htmlFor="timeLimit">
+              <label className={`block ${currentTheme.text} font-medium mb-2 text-sm sm:text-base`} htmlFor="timeLimit">
                 Time Limit (seconds)
               </label>
               <input
@@ -335,14 +335,14 @@ const ModuleEditor: React.FC = () => {
                 onChange={(e) => setTimeLimit(parseInt(e.target.value))}
                 min="60"
                 step="60"
-                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6">
             <div>
-              <label className={`block ${currentTheme.text} font-medium mb-2`} htmlFor="passingScore">
+              <label className={`block ${currentTheme.text} font-medium mb-2 text-sm sm:text-base`} htmlFor="passingScore">
                 Passing Score (%)
               </label>
               <input
@@ -352,44 +352,44 @@ const ModuleEditor: React.FC = () => {
                 onChange={(e) => setPassingScore(parseInt(e.target.value))}
                 min="0"
                 max="100"
-                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+                className={`w-full ${currentTheme.bgPrimary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
               />
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center pt-6 sm:pt-8">
               <input
                 type="checkbox"
                 id="randomize"
                 checked={randomize}
                 onChange={(e) => setRandomize(e.target.checked)}
-                className="mr-2"
+                className="mr-2 w-4 h-4"
               />
-              <label className={`${currentTheme.text} font-medium`} htmlFor="randomize">
+              <label className={`${currentTheme.text} font-medium text-sm sm:text-base`} htmlFor="randomize">
                 Randomize Questions
               </label>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center pt-6 sm:pt-8">
               <input
                 type="checkbox"
                 id="instantFeedback"
                 checked={instantFeedback}
                 onChange={(e) => setInstantFeedback(e.target.checked)}
-                className="mr-2"
+                className="mr-2 w-4 h-4"
               />
-              <label className={`${currentTheme.text} font-medium`} htmlFor="instantFeedback">
+              <label className={`${currentTheme.text} font-medium text-sm sm:text-base`} htmlFor="instantFeedback">
                 Show Instant Feedback
               </label>
             </div>
           </div>
           
-          <div className="mb-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-              <h2 className={`text-xl font-semibold ${currentTheme.text}`}>Quiz Questions</h2>
+          <div className="mb-4 sm:mb-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 sm:mb-4 gap-3 sm:gap-4">
+              <h2 className={`text-lg sm:text-xl font-semibold ${currentTheme.text}`}>Quiz Questions</h2>
               <button
                 type="button"
                 onClick={addQuestion}
-                className={`inline-flex items-center px-3 py-1 ${currentTheme.buttonSecondary} rounded-md hover:opacity-80 w-full sm:w-auto justify-center`}
+                className={`inline-flex items-center px-3 py-2 ${currentTheme.buttonSecondary} rounded-md hover:opacity-80 w-full sm:w-auto justify-center touch-manipulation text-sm sm:text-base`}
               >
                 <Plus className="h-4 w-4 mr-1" />
                 Add Question
@@ -397,22 +397,22 @@ const ModuleEditor: React.FC = () => {
             </div>
             
             {questions.map((q, qIndex) => (
-              <div key={qIndex} className={`${currentTheme.bgPrimary} p-4 rounded-lg mb-4`}>
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-                  <h3 className={`font-medium ${currentTheme.text}`}>Question {qIndex + 1}</h3>
+              <div key={qIndex} className={`${currentTheme.bgPrimary} p-3 sm:p-4 rounded-lg mb-3 sm:mb-4`}>
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 sm:mb-4 gap-3 sm:gap-4">
+                  <h3 className={`font-medium ${currentTheme.text} text-sm sm:text-base`}>Question {qIndex + 1}</h3>
                   {questions.length > 1 && (
                     <button
                       type="button"
                       onClick={() => removeQuestion(qIndex)}
-                      className="text-red-500 hover:text-red-700"
+                      className="text-red-500 hover:text-red-700 touch-manipulation p-1"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   )}
                 </div>
                 
-                <div className="mb-4">
-                  <label className={`block ${currentTheme.text} mb-2`} htmlFor={`question-${qIndex}`}>
+                <div className="mb-3 sm:mb-4">
+                  <label className={`block ${currentTheme.text} mb-2 text-sm sm:text-base`} htmlFor={`question-${qIndex}`}>
                     Question Text
                   </label>
                   <input
@@ -420,13 +420,13 @@ const ModuleEditor: React.FC = () => {
                     id={`question-${qIndex}`}
                     value={q.question}
                     onChange={(e) => handleQuestionChange(qIndex, 'question', e.target.value)}
-                    className={`w-full ${currentTheme.bgSecondary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+                    className={`w-full ${currentTheme.bgSecondary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
                     placeholder="Enter your question"
                   />
                 </div>
 
-                <div className="mb-4">
-                  <label className={`block ${currentTheme.text} mb-2`} htmlFor={`timeLimit-${qIndex}`}>
+                <div className="mb-3 sm:mb-4">
+                  <label className={`block ${currentTheme.text} mb-2 text-sm sm:text-base`} htmlFor={`timeLimit-${qIndex}`}>
                     Question Time Limit (seconds)
                   </label>
                   <div className="flex items-center">
@@ -437,35 +437,35 @@ const ModuleEditor: React.FC = () => {
                       value={q.timeLimit}
                       onChange={(e) => handleQuestionChange(qIndex, 'timeLimit', parseInt(e.target.value))}
                       min="10"
-                      className={`w-32 ${currentTheme.bgSecondary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+                      className={`w-24 sm:w-32 ${currentTheme.bgSecondary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
                     />
                   </div>
                 </div>
                 
-                <div className="mb-4">
-                  <label className={`block ${currentTheme.text} mb-2`}>Answer Options</label>
+                <div className="mb-3 sm:mb-4">
+                  <label className={`block ${currentTheme.text} mb-2 text-sm sm:text-base`}>Answer Options</label>
                   <div className="space-y-2">
                     {q.options.map((option, oIndex) => (
-                      <div key={oIndex} className="flex items-center gap-2">
+                      <div key={oIndex} className="flex items-center gap-2 sm:gap-3">
                         <input
                           type="radio"
                           id={`correct-${qIndex}-${oIndex}`}
                           name={`correct-${qIndex}`}
                           checked={q.correctAnswer === oIndex}
                           onChange={() => handleQuestionChange(qIndex, 'correctAnswer', oIndex)}
-                          className="mr-2"
+                          className="mr-1 sm:mr-2 w-4 h-4 flex-shrink-0"
                         />
                         <input
                           type="text"
                           value={option}
                           onChange={(e) => handleOptionChange(qIndex, oIndex, e.target.value)}
-                          className={`flex-1 ${currentTheme.bgSecondary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500`}
+                          className={`flex-1 ${currentTheme.bgSecondary} ${currentTheme.text} rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-${currentTheme.accent}-500 text-sm sm:text-base`}
                           placeholder={`Option ${oIndex + 1}`}
                         />
                       </div>
                     ))}
                   </div>
-                  <p className={`text-sm ${currentTheme.text} opacity-75 mt-1`}>
+                  <p className={`text-xs sm:text-sm ${currentTheme.text} opacity-75 mt-1`}>
                     Select the radio button next to the correct answer.
                   </p>
                 </div>
@@ -473,11 +473,11 @@ const ModuleEditor: React.FC = () => {
             ))}
           </div>
           
-          <div className="flex justify-end">
+          <div className="flex justify-center sm:justify-end">
             <button
               type="submit"
               disabled={isLoading}
-              className={`inline-flex items-center px-4 py-2 ${currentTheme.buttonPrimary} rounded-md hover:opacity-80 ${
+              className={`inline-flex items-center px-4 py-2 ${currentTheme.buttonPrimary} rounded-md hover:opacity-80 touch-manipulation w-full sm:w-auto justify-center text-sm sm:text-base ${
                 isLoading ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >

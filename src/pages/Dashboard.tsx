@@ -133,7 +133,7 @@ const Dashboard: React.FC = () => {
       <motion.h1 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold text-gray-800 mb-6"
+        className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 px-2 sm:px-0"
       >
         Welcome back, {currentUser.username}!
       </motion.h1>
@@ -142,23 +142,23 @@ const Dashboard: React.FC = () => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8 px-2 sm:px-0"
       >
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-4 sm:p-6">
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-blue-100 text-blue-500 mr-4">
               <BookOpen className="h-6 w-6" />
             </div>
             <div>
               <p className="text-sm text-gray-500">Completed Modules</p>
-              <p className="text-2xl font-bold">
+              <p className="text-xl sm:text-2xl font-bold">
                 {completedModulesCount} / {modules.length}
               </p>
             </div>
           </div>
         </div>
         
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-green-100 text-green-500 mr-4">
               <Zap className="h-6 w-6" />
@@ -182,32 +182,32 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
         
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
               <Award className="h-6 w-6" />
             </div>
             <div>
               <p className="text-sm text-gray-500">Badges Earned</p>
-              <p className="text-2xl font-bold">{badges.length}</p>
+              <p className="text-xl sm:text-2xl font-bold">{badges.length}</p>
             </div>
           </div>
         </div>
       </motion.div>
       
       {/* Recent Activity and Recommended Modules */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 px-2 sm:px-0">
         {/* Recent Activity */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="bg-white rounded-lg shadow"
         >
-          <div className="border-b px-6 py-4">
-            <h2 className="text-xl font-semibold text-gray-800">Recent Activity</h2>
+          <div className="border-b px-4 sm:px-6 py-3 sm:py-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Recent Activity</h2>
           </div>
           
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <AnimatePresence mode="wait">
               {progress.filter(item => item.completed).length > 0 ? (
                 <motion.div 
@@ -231,8 +231,8 @@ const Dashboard: React.FC = () => {
                         <div className="p-2 rounded-full bg-gray-100 text-gray-500 mr-3">
                           <Calendar className="h-5 w-5" />
                         </div>
-                        <div>
-                          <p className="font-medium text-gray-800">
+                        <div className="min-w-0 flex-1">
+                          <p className="font-medium text-gray-800 text-sm sm:text-base">
                             Completed module: {item.module_title}
                           </p>
                           <p className="text-sm text-gray-500">
@@ -253,7 +253,7 @@ const Dashboard: React.FC = () => {
                   <p className="text-gray-500">No completed modules yet. Start learning!</p>
                   <Link 
                     to="/modules" 
-                    className="inline-flex items-center mt-4 text-blue-500 hover:text-blue-700"
+                    className="inline-flex items-center mt-4 text-blue-500 hover:text-blue-700 touch-manipulation"
                   >
                     Browse modules
                     <ArrowRight className="ml-1 h-4 w-4" />
@@ -270,11 +270,11 @@ const Dashboard: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           className="bg-white rounded-lg shadow"
         >
-          <div className="border-b px-6 py-4">
-            <h2 className="text-xl font-semibold text-gray-800">Recommended Modules</h2>
+          <div className="border-b px-4 sm:px-6 py-3 sm:py-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Recommended Modules</h2>
           </div>
           
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <AnimatePresence mode="wait">
               {recommendedModules.length > 0 ? (
                 <motion.div 
@@ -292,16 +292,16 @@ const Dashboard: React.FC = () => {
                     >
                       <Link 
                         to={`/modules/${module.id}`}
-                        className="block bg-gray-50 hover:bg-gray-100 rounded-lg p-4 transition"
+                        className="block bg-gray-50 hover:bg-gray-100 rounded-lg p-3 sm:p-4 transition touch-manipulation"
                       >
                         <div className="flex justify-between items-center">
-                          <div>
-                            <h3 className="font-medium text-gray-800">{module.title}</h3>
+                          <div className="min-w-0 flex-1 mr-3">
+                            <h3 className="font-medium text-gray-800 text-sm sm:text-base truncate">{module.title}</h3>
                             <p className="text-sm text-gray-500">
                               {module.category} • {module.difficulty}
                             </p>
                           </div>
-                          <div className="flex items-center text-green-500">
+                          <div className="flex items-center text-green-500 flex-shrink-0">
                             <span className="mr-1">{module.xp_reward} XP</span>
                             <ArrowRight className="h-4 w-4" />
                           </div>

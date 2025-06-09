@@ -221,21 +221,21 @@ const ModuleDetail: React.FC = () => {
   const renderQuizContent = () => {
     if (isLoading) {
       return (
-        <div className="flex flex-col items-center justify-center py-12">
+        <div className="flex flex-col items-center justify-center py-8 sm:py-12">
           <Loader className={`h-8 w-8 ${currentTheme.text} animate-spin mb-4`} />
-          <p className={`${currentTheme.text} text-lg`}>Loading quiz...</p>
+          <p className={`${currentTheme.text} text-base sm:text-lg`}>Loading quiz...</p>
         </div>
       );
     }
 
     if (error) {
       return (
-        <div className="text-center py-8">
+        <div className="text-center py-6 sm:py-8">
           <AlertCircle className={`h-12 w-12 ${currentTheme.text} mx-auto mb-4`} />
-          <p className={`${currentTheme.text} text-lg mb-2`}>{error}</p>
+          <p className={`${currentTheme.text} text-base sm:text-lg mb-2`}>{error}</p>
           <button
             onClick={() => navigate('/modules')}
-            className={`mt-4 px-4 py-2 ${currentTheme.buttonPrimary} rounded-md`}
+            className={`mt-4 px-4 py-2 ${currentTheme.buttonPrimary} rounded-md touch-manipulation`}
           >
             Return to Modules
           </button>
@@ -245,16 +245,16 @@ const ModuleDetail: React.FC = () => {
 
     if (!questionsLoaded || questions.length === 0) {
       return (
-        <div className="text-center py-8">
+        <div className="text-center py-6 sm:py-8">
           <Loader className={`h-12 w-12 ${currentTheme.text} mx-auto mb-4 animate-spin`} />
-          <p className={`${currentTheme.text} text-lg`}>Loading questions...</p>
+          <p className={`${currentTheme.text} text-base sm:text-lg`}>Loading questions...</p>
         </div>
       );
     }
 
     if (quizCompleted) {
       return (
-        <div className={`${currentTheme.highlight} rounded-lg p-6 text-center`}>
+        <div className={`${currentTheme.highlight} rounded-lg p-4 sm:p-6 text-center`}>
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -262,17 +262,17 @@ const ModuleDetail: React.FC = () => {
           >
             <CheckCircle className="h-8 w-8" />
           </motion.div>
-          <h3 className={`text-xl font-bold ${currentTheme.text} mb-2`}>Quiz Completed!</h3>
-          <p className={`${currentTheme.text} opacity-75 mb-2`}>
+          <h3 className={`text-lg sm:text-xl font-bold ${currentTheme.text} mb-2`}>Quiz Completed!</h3>
+          <p className={`${currentTheme.text} opacity-75 mb-2 text-sm sm:text-base`}>
             You scored {score}%
           </p>
           {isFirstCompletion && earnedXP > 0 && (
-            <p className={`text-${currentTheme.accent}-500 font-bold mb-4`}>
+            <p className={`text-${currentTheme.accent}-500 font-bold mb-4 text-sm sm:text-base`}>
               + {earnedXP} XP earned!
             </p>
           )}
           {!isFirstCompletion && (
-            <p className={`${currentTheme.text} opacity-75 text-sm mb-4`}>
+            <p className={`${currentTheme.text} opacity-75 text-xs sm:text-sm mb-4`}>
               You've already completed this module. No additional XP awarded.
             </p>
           )}
@@ -280,7 +280,7 @@ const ModuleDetail: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('/modules')}
-            className={`px-4 py-2 ${currentTheme.buttonPrimary} rounded-md`}
+            className={`px-4 py-2 ${currentTheme.buttonPrimary} rounded-md touch-manipulation`}
           >
             Continue Learning
           </motion.button>
@@ -293,10 +293,10 @@ const ModuleDetail: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`${currentTheme.highlight} rounded-lg p-6 text-center`}
+          className={`${currentTheme.highlight} rounded-lg p-4 sm:p-6 text-center`}
         >
-          <h3 className={`text-xl font-bold ${currentTheme.text} mb-4`}>Ready to Start?</h3>
-          <p className={`${currentTheme.text} opacity-75 mb-6`}>
+          <h3 className={`text-lg sm:text-xl font-bold ${currentTheme.text} mb-4`}>Ready to Start?</h3>
+          <p className={`${currentTheme.text} opacity-75 mb-6 text-sm sm:text-base`}>
             This quiz contains {questions.length} questions.<br />
             You have {formatTime(module?.time_limit || 1800)} to complete it.<br />
             Each correct answer will earn you {Math.floor((module?.xp_reward || 0) / questions.length)} XP.
@@ -305,7 +305,7 @@ const ModuleDetail: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setQuizStarted(true)}
-            className={`px-6 py-3 ${currentTheme.buttonPrimary} rounded-lg text-lg`}
+            className={`px-4 sm:px-6 py-2 sm:py-3 ${currentTheme.buttonPrimary} rounded-lg text-base sm:text-lg touch-manipulation`}
           >
             Start Quiz
           </motion.button>
@@ -316,9 +316,9 @@ const ModuleDetail: React.FC = () => {
     const currentQuestion = questions[currentQuestionIndex];
     if (!currentQuestion) {
       return (
-        <div className="text-center py-8">
+        <div className="text-center py-6 sm:py-8">
           <AlertCircle className={`h-12 w-12 ${currentTheme.text} mx-auto mb-4`} />
-          <p className={`${currentTheme.text} text-lg`}>Question not found</p>
+          <p className={`${currentTheme.text} text-base sm:text-lg`}>Question not found</p>
         </div>
       );
     }
@@ -330,22 +330,22 @@ const ModuleDetail: React.FC = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
-          className="space-y-6"
+          className="space-y-4 sm:space-y-6"
         >
-          <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
-            <div className={`${currentTheme.highlight} rounded-lg p-4 flex-1`}>
+          <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-4">
+            <div className={`${currentTheme.highlight} rounded-lg p-3 sm:p-4 flex-1`}>
               <div className="flex items-center justify-center">
                 <Timer className={`h-5 w-5 ${currentTheme.text} mr-2`} />
-                <span className={`${currentTheme.text} font-medium`}>
+                <span className={`${currentTheme.text} font-medium text-sm sm:text-base`}>
                   {formatTime(timeRemaining)}
                 </span>
               </div>
             </div>
             
-            <div className={`${currentTheme.highlight} rounded-lg p-4 flex-1`}>
+            <div className={`${currentTheme.highlight} rounded-lg p-3 sm:p-4 flex-1`}>
               <div className="flex items-center justify-center">
                 <Award className={`h-5 w-5 ${currentTheme.text} mr-2`} />
-                <span className={`${currentTheme.text} font-medium`}>
+                <span className={`${currentTheme.text} font-medium text-sm sm:text-base`}>
                   Question {currentQuestionIndex + 1} of {questions.length}
                 </span>
               </div>
@@ -353,7 +353,7 @@ const ModuleDetail: React.FC = () => {
           </div>
 
           <div className="mb-4">
-            <div className="flex justify-between text-sm mb-2">
+            <div className="flex justify-between text-xs sm:text-sm mb-2">
               <span className={`${currentTheme.text}`}>Progress</span>
               <span className={`${currentTheme.text}`}>
                 {Math.round(((currentQuestionIndex + 1) / questions.length) * 100)}%
@@ -371,26 +371,26 @@ const ModuleDetail: React.FC = () => {
             </div>
           </div>
 
-          <div className={`${currentTheme.bgSecondary} p-6 rounded-lg`}>
-            <h3 className={`text-xl font-medium ${currentTheme.text} mb-6`}>
+          <div className={`${currentTheme.bgSecondary} p-4 sm:p-6 rounded-lg`}>
+            <h3 className={`text-lg sm:text-xl font-medium ${currentTheme.text} mb-4 sm:mb-6`}>
               {currentQuestion.question}
             </h3>
             
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-2 sm:gap-3">
               {currentQuestion.options.map((option: string, index: number) => (
                 <motion.button
                   key={index}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => handleAnswerSelect(currentQuestionIndex, index)}
-                  className={`p-4 text-left rounded-lg transition ${
+                  className={`p-3 sm:p-4 text-left rounded-lg transition touch-manipulation ${
                     selectedAnswers[currentQuestionIndex] === index
                       ? `${currentTheme.buttonPrimary}`
                       : `${currentTheme.bgPrimary} hover:bg-opacity-75`
                   }`}
                 >
                   <div className="flex items-center">
-                    <div className={`w-5 h-5 rounded-full border flex items-center justify-center mr-3 ${
+                    <div className={`w-5 h-5 rounded-full border flex items-center justify-center mr-3 flex-shrink-0 ${
                       selectedAnswers[currentQuestionIndex] === index 
                         ? `border-${currentTheme.accent}-500 bg-${currentTheme.accent}-500` 
                         : 'border-gray-300'
@@ -399,20 +399,20 @@ const ModuleDetail: React.FC = () => {
                         <div className="w-2 h-2 rounded-full bg-white"></div>
                       )}
                     </div>
-                    <span className={currentTheme.text}>{option}</span>
+                    <span className={`${currentTheme.text} text-sm sm:text-base`}>{option}</span>
                   </div>
                 </motion.button>
               ))}
             </div>
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handlePreviousQuestion}
               disabled={currentQuestionIndex === 0}
-              className={`px-4 py-2 rounded-md ${
+              className={`px-4 py-2 rounded-md touch-manipulation order-2 sm:order-1 ${
                 currentQuestionIndex === 0
                   ? 'opacity-50 cursor-not-allowed'
                   : currentTheme.buttonSecondary
@@ -426,7 +426,7 @@ const ModuleDetail: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleNextQuestion}
-                className={`px-4 py-2 rounded-md ${currentTheme.buttonPrimary}`}
+                className={`px-4 py-2 rounded-md ${currentTheme.buttonPrimary} touch-manipulation order-1 sm:order-2`}
               >
                 Next
               </motion.button>
@@ -435,7 +435,7 @@ const ModuleDetail: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleSubmitQuiz}
-                className={`px-4 py-2 rounded-md ${currentTheme.buttonPrimary}`}
+                className={`px-4 py-2 rounded-md ${currentTheme.buttonPrimary} touch-manipulation order-1 sm:order-2`}
               >
                 Submit Quiz
               </motion.button>
@@ -447,21 +447,21 @@ const ModuleDetail: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4">
+    <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6">
       <button
         onClick={() => navigate('/modules')}
-        className={`inline-flex items-center ${currentTheme.text} hover:opacity-80 mb-6`}
+        className={`inline-flex items-center ${currentTheme.text} hover:opacity-80 mb-4 sm:mb-6 touch-manipulation`}
       >
         <ArrowLeft className="h-4 w-4 mr-1" />
         Back to Modules
       </button>
       
-      <div className={`${currentTheme.cardBg} rounded-lg ${currentTheme.shadow} overflow-hidden mb-8`}>
-        <div className={`${currentTheme.buttonPrimary} p-6`}>
-          <h1 className="text-xl sm:text-2xl font-bold mb-2">
+      <div className={`${currentTheme.cardBg} rounded-lg ${currentTheme.shadow} overflow-hidden mb-6 sm:mb-8`}>
+        <div className={`${currentTheme.buttonPrimary} p-4 sm:p-6`}>
+          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2">
             {module?.title || 'Loading...'}
           </h1>
-          <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base text-opacity-90">
+          <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm lg:text-base text-opacity-90">
             <BookOpen className="h-5 w-5" />
             <span>{module?.category}</span>
             <span className="mx-2">•</span>
@@ -471,7 +471,7 @@ const ModuleDetail: React.FC = () => {
           </div>
         </div>
         
-        <div className="p-4 sm:p-6">
+        <div className="p-3 sm:p-4 lg:p-6">
           {renderQuizContent()}
         </div>
       </div>
