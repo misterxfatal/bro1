@@ -210,7 +210,7 @@ const Layout: React.FC = () => {
 
               <nav className="px-4 pb-4">
                 <div className="space-y-1">
-                  {[...navItems, { to: "/settings", icon: Settings, label: "Settings" }].map(({ to, icon: Icon, label }) => (
+                  {navItems.map(({ to, icon: Icon, label }) => (
                     <motion.div
                       key={to}
                       whileHover={{ x: 4 }}
