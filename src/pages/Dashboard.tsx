@@ -150,7 +150,7 @@ const Dashboard: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
       >
-        <div className={`card-professional p-6`}>
+        <div className={`${currentTheme.cardBg} ${currentTheme.cardShadow} p-6 rounded-xl`}>
           <div className="flex items-center justify-between mb-4">
             <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
               <BookOpen className={`h-6 w-6 ${currentTheme.info}`} />
@@ -160,19 +160,19 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
           <div>
-            <p className={`text-2xl font-bold ${currentTheme.text} mb-1`}>
+            <p className={`text-2xl font-bold ${currentTheme.cardText} mb-1`}>
               {completedModulesCount}
             </p>
-            <p className={`text-sm ${currentTheme.textMuted}`}>
+            <p className={`text-sm ${currentTheme.cardTextMuted}`}>
               Modules Completed
             </p>
-            <p className={`text-xs ${currentTheme.textCaption} mt-1`}>
+            <p className={`text-xs ${currentTheme.cardTextSecondary} mt-1`}>
               of {modules.length} total
             </p>
           </div>
         </div>
         
-        <div className={`card-professional p-6`}>
+        <div className={`${currentTheme.cardBg} ${currentTheme.cardShadow} p-6 rounded-xl`}>
           <div className="flex items-center justify-between mb-4">
             <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
               <Zap className={`h-6 w-6 ${currentTheme.warning}`} />
@@ -182,10 +182,10 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
           <div>
-            <p className={`text-2xl font-bold ${currentTheme.text} mb-1`}>
+            <p className={`text-2xl font-bold ${currentTheme.cardText} mb-1`}>
               {currentUser.xp}
             </p>
-            <p className={`text-sm ${currentTheme.textMuted}`}>
+            <p className={`text-sm ${currentTheme.cardTextMuted}`}>
               Experience Points
             </p>
             <div className="mt-3">
@@ -197,14 +197,14 @@ const Dashboard: React.FC = () => {
                   transition={{ duration: 1, ease: "easeOut" }}
                 />
               </div>
-              <p className={`text-xs ${currentTheme.textCaption} mt-1`}>
+              <p className={`text-xs ${currentTheme.cardTextSecondary} mt-1`}>
                 {levelInfo.remainingXP} XP to level {levelInfo.level + 1}
               </p>
             </div>
           </div>
         </div>
         
-        <div className={`card-professional p-6`}>
+        <div className={`${currentTheme.cardBg} ${currentTheme.cardShadow} p-6 rounded-xl`}>
           <div className="flex items-center justify-between mb-4">
             <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
               <Award className={`h-6 w-6 ${currentTheme.success}`} />
@@ -214,19 +214,19 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
           <div>
-            <p className={`text-2xl font-bold ${currentTheme.text} mb-1`}>
+            <p className={`text-2xl font-bold ${currentTheme.cardText} mb-1`}>
               {badges.length}
             </p>
-            <p className={`text-sm ${currentTheme.textMuted}`}>
+            <p className={`text-sm ${currentTheme.cardTextMuted}`}>
               Badges Earned
             </p>
-            <p className={`text-xs ${currentTheme.textCaption} mt-1`}>
+            <p className={`text-xs ${currentTheme.cardTextSecondary} mt-1`}>
               Keep learning to earn more!
             </p>
           </div>
         </div>
 
-        <div className={`card-professional p-6`}>
+        <div className={`${currentTheme.cardBg} ${currentTheme.cardShadow} p-6 rounded-xl`}>
           <div className="flex items-center justify-between mb-4">
             <div className={`p-3 rounded-xl ${currentTheme.surface}`}>
               <TrendingUp className={`h-6 w-6 ${currentTheme.info}`} />
@@ -236,13 +236,13 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
           <div>
-            <p className={`text-2xl font-bold ${currentTheme.text} mb-1`}>
+            <p className={`text-2xl font-bold ${currentTheme.cardText} mb-1`}>
               {progress.filter(p => !p.completed).length}
             </p>
-            <p className={`text-sm ${currentTheme.textMuted}`}>
+            <p className={`text-sm ${currentTheme.cardTextMuted}`}>
               In Progress
             </p>
-            <p className={`text-xs ${currentTheme.textCaption} mt-1`}>
+            <p className={`text-xs ${currentTheme.cardTextSecondary} mt-1`}>
               Modules started
             </p>
           </div>
@@ -257,14 +257,14 @@ const Dashboard: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           className="lg:col-span-2"
         >
-          <div className={`card-professional`}>
+          <div className={`${currentTheme.cardBg} ${currentTheme.cardShadow} rounded-xl`}>
             <div className="p-6 border-b ${currentTheme.divider}">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className={`p-2 rounded-lg ${currentTheme.surface}`}>
                     <Clock className={`h-5 w-5 ${currentTheme.text}`} />
                   </div>
-                  <h2 className={`text-xl font-semibold ${currentTheme.text}`}>Recent Activity</h2>
+                  <h2 className={`text-xl font-semibold ${currentTheme.cardText}`}>Recent Activity</h2>
                 </div>
                 <Link 
                   to="/modules" 
@@ -300,14 +300,14 @@ const Dashboard: React.FC = () => {
                             <Award className={`h-5 w-5 ${currentTheme.success}`} />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className={`font-medium ${currentTheme.text} text-sm sm:text-base truncate`}>
+                            <p className={`font-medium ${currentTheme.cardText} text-sm sm:text-base truncate`}>
                               Completed: {item.module_title}
                             </p>
                             <div className="flex items-center space-x-4 mt-1">
                               <span className={`text-sm ${currentTheme.success} font-medium`}>
                                 Score: {item.score}%
                               </span>
-                              <span className={`text-sm ${currentTheme.textMuted}`}>
+                              <span className={`text-sm ${currentTheme.cardTextMuted}`}>
                                 {formatDate(item.last_attempt)}
                               </span>
                             </div>
@@ -328,8 +328,8 @@ const Dashboard: React.FC = () => {
                     <div className={`p-4 rounded-full ${currentTheme.surface} w-16 h-16 mx-auto mb-4 flex items-center justify-center`}>
                       <Calendar className={`h-8 w-8 ${currentTheme.textMuted}`} />
                     </div>
-                    <h3 className={`text-lg font-medium ${currentTheme.text} mb-2`}>No completed modules yet</h3>
-                    <p className={`${currentTheme.textMuted} mb-4`}>Start your learning journey today!</p>
+                    <h3 className={`text-lg font-medium ${currentTheme.cardText} mb-2`}>No completed modules yet</h3>
+                    <p className={`${currentTheme.cardTextMuted} mb-4`}>Start your learning journey today!</p>
                     <Link 
                       to="/modules" 
                       className={`${currentTheme.buttonPrimary} inline-flex items-center space-x-2 touch-manipulation`}
@@ -351,13 +351,13 @@ const Dashboard: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           className="lg:col-span-1"
         >
-          <div className={`card-professional`}>
+          <div className={`${currentTheme.cardBg} ${currentTheme.cardShadow} rounded-xl`}>
             <div className="p-6 border-b ${currentTheme.divider}">
               <div className="flex items-center space-x-3">
                 <div className={`p-2 rounded-lg ${currentTheme.surface}`}>
                   <Target className={`h-5 w-5 ${currentTheme.text}`} />
                 </div>
-                <h2 className={`text-xl font-semibold ${currentTheme.text}`}>Recommended</h2>
+                <h2 className={`text-xl font-semibold ${currentTheme.cardText}`}>Recommended</h2>
               </div>
             </div>
             
@@ -383,14 +383,14 @@ const Dashboard: React.FC = () => {
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1 min-w-0">
-                              <h3 className={`font-medium ${currentTheme.text} text-sm line-clamp-2 group-hover:${currentTheme.info} transition-colors`}>
+                              <h3 className={`font-medium ${currentTheme.cardText} text-sm line-clamp-2 group-hover:${currentTheme.info} transition-colors`}>
                                 {module.title}
                               </h3>
                               <div className="flex items-center space-x-2 mt-1">
                                 <span className={`badge-professional-primary text-xs`}>
                                   {module.category}
                                 </span>
-                                <span className={`text-xs ${currentTheme.textMuted}`}>
+                                <span className={`text-xs ${currentTheme.cardTextMuted}`}>
                                   {module.difficulty}
                                 </span>
                               </div>
@@ -400,11 +400,11 @@ const Dashboard: React.FC = () => {
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-1">
                               <Zap className={`h-4 w-4 ${currentTheme.warning}`} />
-                              <span className={`text-sm font-medium ${currentTheme.text}`}>
+                              <span className={`text-sm font-medium ${currentTheme.cardText}`}>
                                 {module.xp_reward} XP
                               </span>
                             </div>
-                            <span className={`text-xs ${currentTheme.textCaption}`}>
+                            <span className={`text-xs ${currentTheme.cardTextSecondary}`}>
                               {Math.floor((module.time_limit || 0) / 60)} min
                             </span>
                           </div>
@@ -422,8 +422,8 @@ const Dashboard: React.FC = () => {
                     <div className={`p-4 rounded-full ${currentTheme.surface} w-16 h-16 mx-auto mb-4 flex items-center justify-center`}>
                       <BookOpen className={`h-8 w-8 ${currentTheme.textMuted}`} />
                     </div>
-                    <h3 className={`text-lg font-medium ${currentTheme.text} mb-2`}>All caught up!</h3>
-                    <p className={`${currentTheme.textMuted} text-sm`}>
+                    <h3 className={`text-lg font-medium ${currentTheme.cardText} mb-2`}>All caught up!</h3>
+                    <p className={`${currentTheme.cardTextMuted} text-sm`}>
                       You've completed all available modules. Check back later for new content!
                     </p>
                   </motion.div>
