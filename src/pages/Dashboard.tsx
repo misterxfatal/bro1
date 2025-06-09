@@ -332,7 +332,7 @@ const Dashboard: React.FC = () => {
                     <p className={`${currentTheme.cardTextMuted} mb-4`}>Start your learning journey today!</p>
                     <Link 
                       to="/modules" 
-                      className={`${currentTheme.buttonPrimary} inline-flex items-center space-x-2 touch-manipulation`}
+                      className={`${currentTheme.buttonPrimary} inline-flex items-center space-x-2 touch-manipulation rounded-full px-6 py-3`}
                     >
                       <BookOpen className="h-4 w-4" />
                       <span>Browse Modules</span>
